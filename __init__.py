@@ -135,9 +135,9 @@ async def clanbattleDaycall():
 			bot = nonebot.get_bot()
 			glist = await sv.get_enable_groups()
 			for gid, selfids in glist.items():
-				msg = f'今天也是充满希望的一天，大家早安，POP子在此提醒各位\n{title}\n开始于 {start}\n还剩余 {day}天{hour}时{minute}分{second}秒\n{ms.at(await clanbattle_remind.get_leader(gid))}人招齐了吗？在农场的各位回来了吗？可千万别忘记只有三天会战就开始了哦！'
+				msg = f'今天也是充满希望的一天，大家早安，{name}在此提醒各位\n{title}\n开始于 {start}\n还剩余 {day}天{hour}时{minute}分{second}秒\n{ms.at(await clanbattle_remind.get_leader(gid))}人招齐了吗？在农场的各位回来了吗？可千万别忘记只有三天会战就开始了哦！'
 				if (await clanbattle_remind.get_leader(gid) == 0 or not clanbattle_remind.mention_check(gid)):
-					msg = f'今天也是充满希望的一天，大家早安，POP子在此提醒各位\n{title}\n开始于 {start}\n还剩余 {day}天{hour}时{minute}分{second}秒'
+					msg = f'今天也是充满希望的一天，大家早安，{name}在此提醒各位\n{title}\n开始于 {start}\n还剩余 {day}天{hour}时{minute}分{second}秒'
 				try:
 					await asyncio.sleep(0.2)
 					await bot.send_group_msg(self_id=random.choice(selfids), group_id=gid, message=msg)
@@ -151,14 +151,14 @@ async def clanbattleDaycall():
 			hour = int((begin/3600)-day*24)
 			minute = int((begin/60)-hour*60-day*60*24)
 			second = int(begin-minute*60-hour*3600-day*24*60*60)
-			msg = f'今天也是充满希望的一天，大家早安，POP子在此提醒各位\n{title}\n开始于 {start}\n还剩余 {day}天{hour}时{minute}分{second}秒'
+			msg = f'今天也是充满希望的一天，大家早安，{name}在此提醒各位\n{title}\n开始于 {start}\n还剩余 {day}天{hour}时{minute}分{second}秒'
 			await sv.broadcast(msg, 'clanbattleDaycall', 0.2)
 	else:
 		day = int(over/(60*60*24))
 		hour = int((over/3600)-day*24)
 		minute = int((over/60)-hour*60-day*60*24)
 		second = int(over-minute*60-hour*3600-day*24*60*60)
-		msg = f'今天也是充满希望的一天，各位辛苦了，POP子在此提醒各位\n{title}已经开始，大家请加油！\n本次会战将在 {end}结束\n还剩余 {day}天{hour}时{minute}分{second}秒'
+		msg = f'今天也是充满希望的一天，各位辛苦了，{name}在此提醒各位\n{title}已经开始，大家请加油！\n本次会战将在 {end}结束\n还剩余 {day}天{hour}时{minute}分{second}秒'
 		await sv.broadcast(msg, 'clanbattleDaycall', 0.2)
 
 @sv.on_prefix('设置会长')
