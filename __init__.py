@@ -65,23 +65,24 @@ async def clanbattleTimecheck(bot, ev: CQEvent):
 		msg = f'{title}已经开始，大家请加油！\n本次会战将在 {end}结束\n还剩余 {day}天{hour}时{minute}分{second}秒'
 		await bot.finish(ev, msg)
 
-_config_file = os.path.join(os.path.dirname(__file__), 'config.json')
-remind_hour = 0
-remind_minute = 0
-time_setting = {}
-try:
-	with open(_config_file, encoding='utf8') as f:
-		time_setting = json.load(f)
-except FileNotFoundError as e:
-	sv.logger.warning('group_pool_config.json not found')
-time_setting = {'hour': 5, 'minute': 0}
+#这里本来想做成时间可调，但是发现没办法
+#_config_file = os.path.join(os.path.dirname(__file__), 'config.json')
+#remind_hour = 0
+#remind_minute = 0
+#time_setting = {}
+#try:
+	#with open(_config_file, encoding='utf8') as f:
+		#time_setting = json.load(f)
+#except FileNotFoundError as e:
+	#sv.logger.warning('group_pool_config.json not found')
+#time_setting = {'hour': 5, 'minute': 0}
 
-def dump_config():
-	with open(_config_file, 'w', encoding='utf8') as f:
-		json.dump(time_setting, f, ensure_ascii=False)
+#def dump_config():
+	#with open(_config_file, 'w', encoding='utf8') as f:
+		#json.dump(time_setting, f, ensure_ascii=False)
 
-remind_hour = time_setting['hour']
-remind_minute = time_setting['minute']
+#remind_hour = time_setting['hour']
+#remind_minute = time_setting['minute']
 
 @sv.on_prefix('会战提醒设置')
 async def clanbattle_remind_setting(bot, ev: CQEvent):
@@ -91,24 +92,24 @@ async def clanbattle_remind_setting(bot, ev: CQEvent):
 	uid = ev.user_id
 	args = ev.message.extract_plain_text().split()
 	if len(args) == 0:
-		msg = f'请在后面输入指令\n时间\n提醒/不提醒会长'
-	elif args[0] == '时间':
-		if args[1] and args[1].isdigit():
-			remind_hour = int(args[1])
-			time_setting['hour'] = int(args[1])
-		else:
-			msg = f'请输入合法的参数'
-		if args[2] and args[2].isdigit():
-			remind_minute = int(args[2])
-			time_setting['minute'] = int(args[2])
-		else:
-			msg = f'请输入合法的参数'
-		msg = f'提醒时间设置完毕，将于每日{remind_hour}时{remind_minute}分提醒'
-		try:
-			with open(_config_file, 'w', encoding='utf8') as f:
-				json.dump(time_setting, f, ensure_ascii=False)
-		except:
-			traceback.print_exc()
+		msg = f'请在后面输入指令\n提醒/不提醒会长'
+	#elif args[0] == '时间':
+		#if args[1] and args[1].isdigit():
+			#remind_hour = int(args[1])
+			#time_setting['hour'] = int(args[1])
+		#else:
+			#msg = f'请输入合法的参数'
+		#if args[2] and args[2].isdigit():
+			#remind_minute = int(args[2])
+			#time_setting['minute'] = int(args[2])
+		#else:
+			#msg = f'请输入合法的参数'
+		#msg = f'提醒时间设置完毕，将于每日{remind_hour}时{remind_minute}分提醒'
+		#try:
+			#with open(_config_file, 'w', encoding='utf8') as f:
+				#json.dump(time_setting, f, ensure_ascii=False)
+		#except:
+			#traceback.print_exc()
 	elif args[0] == '提醒会长':
 		await clanbattle_remind.mention_leader(group_id, mention = True)
 		msg = f'提醒会长已开启'
