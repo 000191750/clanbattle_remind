@@ -49,7 +49,6 @@ async def clanbattleTimecheck(bot, ev: CQEvent):
 	end = check["end"]
 	begin = int(check["begin"])
 	over = int(check["over"])
-	await bot.send(ev, leader_id)
 	if begin > 0:
 		day = int(begin/(60*60*24))
 		hour = int((begin/3600)-day*24)
