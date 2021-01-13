@@ -135,7 +135,7 @@ async def clanbattleDaycall():
 			bot = nonebot.get_bot()
 			glist = await sv.get_enable_groups()
 			for gid, selfids in glist.items():
-				msg = f'今天也是充满希望的一天，大家早安，{name}在此提醒各位\n{title}\n开始于 {start}\n还剩余 {day}天{hour}时{minute}分{second}秒\n{ms.at(await clanbattle_remind.get_leader(gid))}人招齐了吗？在农场的各位回来了吗？可千万别忘记只有三天会战就开始了哦！'
+				msg = f'今天也是充满希望的一天，大家早安，{name}在此提醒各位\n{title}\n开始于 {start}\n还剩余 {day}天{hour}时{minute}分{second}秒\n{ms.at(await clanbattle_remind.get_leader(gid))}人招齐了吗？在农场的各位回来了吗？可千万别忘记只有{day+1}天会战就开始了哦！'
 				if (await clanbattle_remind.get_leader(gid) == 0 or not clanbattle_remind.mention_check(gid)):
 					msg = f'今天也是充满希望的一天，大家早安，{name}在此提醒各位\n{title}\n开始于 {start}\n还剩余 {day}天{hour}时{minute}分{second}秒'
 				try:
